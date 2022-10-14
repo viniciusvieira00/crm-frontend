@@ -3,12 +3,11 @@ import api from "../api";
 
 const login = (email,password) => {
     return api.post('api/users/login', {email, password}).then((res) => {
-          console.log(res)
           if(res.data.token) {
-            localStorage.setItem("user", JSON.stringify(res.data.user))
+            localStorage.setItem("user", JSON.stringify(res.data))
           }
 
-          return res.data.user;
+          return res.data;
         })
       
 }
