@@ -51,7 +51,7 @@ const Tarefas = () => {
         {/* <Grid item xs= {14} my={4} md= {12} >
           <Teste/>
         </Grid> */}
-          <iframe width={'80%'} height= {'1000px'} src="https://6349e38ce374d21d5b847b5d--timely-zuccutto-7697a6.netlify.app/"></iframe>
+          <iframe width={'100%'} height= {'1000px'} src="https://6349e38ce374d21d5b847b5d--timely-zuccutto-7697a6.netlify.app/"></iframe>
       </Grid>
     </ApexChartWrapper>
   )

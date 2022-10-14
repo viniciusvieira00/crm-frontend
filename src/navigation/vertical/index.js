@@ -47,15 +47,15 @@ const navigation = () => {
       path: '/tarefas',
       openInNewTab: false
     },
-    {
-      sectionTitle: 'Whatsapp'
-    },
-    {
-      title: 'BOT',
-      icon: AlertCircleOutline,
-      path: '/bot',
-      openInNewTab: false
-    },
+    // {
+    //   sectionTitle: 'Whatsapp'
+    // },
+    // {
+    //   title: 'BOT',
+    //   icon: AlertCircleOutline,
+    //   path: '/bot',
+    //   openInNewTab: false
+    // },
     
     // {
     //   sectionTitle: 'Utilidades'
