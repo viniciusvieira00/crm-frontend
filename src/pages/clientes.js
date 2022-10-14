@@ -1,12 +1,14 @@
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
 import React from 'react'
+
 // ** Icons Imports
 import Poll from 'mdi-material-ui/Poll'
 import CurrencyUsd from 'mdi-material-ui/CurrencyUsd'
 import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
 import BriefcaseVariantOutline from 'mdi-material-ui/BriefcaseVariantOutline'
 import { useState } from 'react'
+
 // ** Custom Components Imports
 import CardStatisticsVerticalComponent from 'src/@core/components/card-statistics/card-stats-vertical'
 
@@ -15,6 +17,7 @@ import ApexChartWrapper from 'src/@core/styles/libs/react-apexcharts'
 import { Box, Button, Input, Modal, Typography } from '@mui/material'
 import api from '../utils/api'
 import authService from 'src/utils/auth/auth-service'
+
 // ** Demo Components Imports
 import Table from 'src/views/clientes/Table'
 import Trophy from 'src/views/dashboard/Trophy'
@@ -24,15 +27,25 @@ import authHeader from 'src/utils/auth/auth-header'
 import { useRouter } from 'next/router'
 import ModalClient from 'src/views/clientes/ModalClient'
 const timer = ms => new Promise(res => setTimeout(res, ms))
+
 const Clientes = () => {
+
   const [value, setValue] = useState('');
+
   const [open, setOpen] = useState(false);
+
   const [message, setMessage] = useState('');
+  
   const [numero,setNumero] = useState('');
+  
   const [clientsFiltered, setClientsFiltered] = useState()
+  
   const [clients, setClients] = useState([]);
+  
   const [openFilter, setOpenFilter] = useState(false);
+  
   const [currentUser, setCurrentUser] = useState(undefined);
+  
   const [values, setValues] = useState({
     email : '',
     name : '',
@@ -43,9 +56,11 @@ const Clientes = () => {
     produto: '',
     id: ''
   });
+  
   const [filter, setFilter] = useState('')
 
   const handleOpen = () => setOpen(true);
+  
   const handleClose = () => {
     setOpen(false);
   }
@@ -55,11 +70,13 @@ const Clientes = () => {
 
 
   const handleCloseFilter = () => setOpenFilter(false);
+  
   const handleOpenFilter = () => setOpenFilter(true);
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
   }
+  
   const router = useRouter()
 
 
@@ -76,7 +93,9 @@ const Clientes = () => {
     }, {        headers: authHeader()})
     window.location.reload()
 }
+
 const handleDeleteClient = (id) => {
+  
   const user = authService.getCurrentUser();
   api.delete(`api/clients/${id}/${user.user}`, {        headers: authHeader()})
   window.location.reload()
@@ -132,6 +151,7 @@ const handleDeleteClient = (id) => {
     }
 
   }
+  
   const handleFilterClients = () => {
     let arr = []
     clientsFiltered.filter((item) => {
@@ -149,7 +169,8 @@ const handleDeleteClient = (id) => {
   
 
   return (
-    <ApexChartWrapper>
+  
+  <ApexChartWrapper>
       <Grid container spacing={6}>
         <Grid item xs={12} md={4}>
           <Typography variant='h4'>Clientes</Typography>

@@ -12,6 +12,7 @@ import { useRouter } from 'next/router'
 import { array } from 'prop-types';
 
 export default function Vendas() {
+
   const [value, setValue] = useState('');
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('');
@@ -26,6 +27,7 @@ export default function Vendas() {
   const [elementTicket, setElementTicket] = useState()
   const [clientsTickets, setClientsTickets] =useState()
   const [ticketTitulo, setTicketTitulo] = useState()
+  
   const [values, setValues] = useState({
     item : '',
     client : '',
@@ -44,12 +46,15 @@ export default function Vendas() {
     setFilter(event.target.value)
 
 
+  
   const handleCloseFilter = () => setOpenFilter(false);
+  
   const handleOpenFilter = () => setOpenFilter(true);
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
   }
+  
   const router = useRouter()
 
   const handleSubmit = () => {
@@ -67,6 +72,7 @@ export default function Vendas() {
     }
 
   }
+  
   const handleRefreshUser = () => {
     api.put(`api/tickets/`+ values.id, {
         titulo: values.titulo,
@@ -82,7 +88,7 @@ const handleDeleteTicket = (id) => {
 
   
 
-  const handleGetTicket = (id) => {
+const handleGetTicket = (id) => {
     
     api.get(`api/tickets/${id}`, { headers: authHeader()})
     .then((data) => {
@@ -120,6 +126,7 @@ const handleDeleteTicket = (id) => {
 
     
   },[])
+
   const handleFilterClients = () => {
     let arr = []
     ticketsFiltered.filter((item) => {
@@ -134,7 +141,8 @@ const handleDeleteTicket = (id) => {
   const filtro = tickets.filter((item) => item.client.includes(filter))
 
   return (
-    <>
+
+  <>
   <Grid container spacing={6}>
         <Grid item xs={12} md={4}>
           <Typography variant='h4'>Tickets</Typography>

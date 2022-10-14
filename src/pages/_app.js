@@ -9,6 +9,7 @@ import NProgress from 'nprogress'
 import { CacheProvider } from '@emotion/react'
 
 import { useEffect, useState } from 'react'
+
 // ** Config Imports
 import themeConfig from 'src/configs/themeConfig'
 

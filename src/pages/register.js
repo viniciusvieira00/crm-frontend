@@ -42,6 +42,7 @@ import axios from 'axios'
 import apiKanban from 'src/utils/apiKanban'
 import { FormLabel } from '@mui/material'
 import { useRouter } from 'next/router'
+
 // ** Styled Components
 
 
@@ -67,6 +68,7 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 
 
 const RegisterPage = () => {
+
   // ** States
   const router = useRouter()
   const [values, setValues] = useState({
@@ -121,6 +123,7 @@ const RegisterPage = () => {
   }
 
   return (
+    
     <Box className='content-center'>
       <Card sx={{ zIndex: 1 }}>
         <CardContent sx={{ padding: theme => `${theme.spacing(12, 9, 7)} !important` }}>

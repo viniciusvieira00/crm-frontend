@@ -7,6 +7,7 @@ import CurrencyUsd from 'mdi-material-ui/CurrencyUsd'
 import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
 import BriefcaseVariantOutline from 'mdi-material-ui/BriefcaseVariantOutline'
 import { useEffect, useState } from 'react'
+
 // ** Custom Components Imports
 import CardStatisticsVerticalComponent from 'src/@core/components/card-statistics/card-stats-vertical'
 
@@ -15,6 +16,7 @@ import ApexChartWrapper from 'src/@core/styles/libs/react-apexcharts'
 import { Button, Typography } from '@mui/material'
 import api from '../utils/api'
 import authService from 'src/utils/auth/auth-service'
+
 // ** Demo Components Imports
 import Table from 'src/views/clientes/Table'
 import Trophy from 'src/views/dashboard/Trophy'
@@ -25,10 +27,15 @@ import DepositWithdraw from 'src/views/dashboard/DepositWithdraw'
 import SalesByCountries from 'src/views/dashboard/SalesByCountries'
 import QRCode from 'react-qr-code';
 import { useRouter } from 'next/router'
+
 const Dashboard = () => {
+
   const [value, setValue] = useState('');
+
   const [message, setMessage] = useState('');
+
   const [numero,setNumero] = useState('');
+  
   const [currentUser, setCurrentUser] = useState(undefined)
  
   const router = useRouter()
@@ -41,6 +48,7 @@ const Dashboard = () => {
 
 
   const handleDelete = () => setValue('')
+  
   const handleMessage = (event) => setMessage(event.target.value)
 
   const handleNumero = (event) => setNumero(event.target.value);
@@ -61,7 +69,9 @@ const Dashboard = () => {
 
     
   },[])
+  
   return (
+
     <ApexChartWrapper>
       <Grid container spacing={6}>
         <Grid item xs={12} md={4}>
