@@ -70,7 +70,9 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 const RegisterPage = () => {
 
   // ** States
+  
   const router = useRouter()
+  
   const [values, setValues] = useState({
     email : '',
     password: '',
@@ -123,7 +125,7 @@ const RegisterPage = () => {
   }
 
   return (
-    
+
     <Box className='content-center'>
       <Card sx={{ zIndex: 1 }}>
         <CardContent sx={{ padding: theme => `${theme.spacing(12, 9, 7)} !important` }}>

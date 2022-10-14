@@ -1,3 +1,4 @@
+
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
 
@@ -10,7 +11,7 @@ import { useRouter } from 'next/router'
 import Teste from '../views/tarefas/Board'
 
 const Tarefas = () => {
-  
+
   const [boards, setBoards] = useState();
   const [currentUser, setCurrentUser] = useState(undefined)
 
@@ -42,8 +43,10 @@ const Tarefas = () => {
 
     
   },[])
+ 
   return (
-    <ApexChartWrapper>
+  
+  <ApexChartWrapper>
       <Grid ml = {3} container spacing={12} mt={3}>
         {/* <Grid item xs= {14} my={4} md= {12} >
           <Teste/>

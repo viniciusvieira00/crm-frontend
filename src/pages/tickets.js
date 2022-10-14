@@ -38,6 +38,7 @@ export default function Vendas() {
   const clientTickets = []
 
   const handleOpen = () => setOpen(true);
+  
   const handleClose = () => {
     setOpen(false);
   }

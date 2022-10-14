@@ -26,7 +26,6 @@ import { useEffect } from 'react'
 import authHeader from 'src/utils/auth/auth-header'
 import { useRouter } from 'next/router'
 import ModalClient from 'src/views/clientes/ModalClient'
-const timer = ms => new Promise(res => setTimeout(res, ms))
 
 const Clientes = () => {
 
@@ -132,6 +131,7 @@ const handleDeleteClient = (id) => {
   },[])
 
   const handleSubmit = () => {
+    
     try {
       const user = authService.getCurrentUser();
       
