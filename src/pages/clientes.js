@@ -131,7 +131,7 @@ const handleDeleteClient = (id) => {
   },[])
 
   const handleSubmit = () => {
-    
+
     try {
       const user = authService.getCurrentUser();
       
@@ -145,7 +145,7 @@ const handleDeleteClient = (id) => {
         produto: values.produto
       }, {        headers: authHeader()})
 
-      // window.location.reload()
+      window.location.reload()
     } catch (error) {
       console.log(error)
     }
