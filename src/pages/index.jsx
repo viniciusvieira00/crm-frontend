@@ -14,6 +14,7 @@ import TextField from '@mui/material/TextField'
 import InputLabel from '@mui/material/InputLabel'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
+import Image from 'next/image'
 import CardContent from '@mui/material/CardContent'
 import FormControl from '@mui/material/FormControl'
 import OutlinedInput from '@mui/material/OutlinedInput'
@@ -22,6 +23,7 @@ import MuiCard from '@mui/material/Card'
 import InputAdornment from '@mui/material/InputAdornment'
 import MuiFormControlLabel from '@mui/material/FormControlLabel'
 import api from 'src/utils/api'
+import logo from '../../apple-touch-icon.png'
 
 // ** Icons Imports
 import Google from 'mdi-material-ui/Google'
@@ -114,18 +116,7 @@ const LoginPage = () => {
           <CardContent sx={{ padding: theme => `${theme.spacing(12, 9, 7)} !important` }}>
             <Box sx={{ mb: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
-              <Typography
-                variant='h6'
-                sx={{
-                  ml: 3,
-                  lineHeight: 1,
-                  fontWeight: 600,
-                  textTransform: 'uppercase',
-                  fontSize: '1.5rem !important'
-                }}
-              >
-                Dashboard
-              </Typography>
+            <Image width={300} height={70} src={logo}/>
             </Box>
             <Box sx={{ mb: 6 }}>
               <Typography variant='h5' sx={{ fontWeight: 600, marginBottom: 1.5 }}>
@@ -174,7 +165,7 @@ const LoginPage = () => {
               >
                 Login
               </Button>
-              <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+              {/* <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
                 <Typography variant='body2' sx={{ marginRight: 2 }}>
                   Novo na plataforma?
                 </Typography>
@@ -183,7 +174,7 @@ const LoginPage = () => {
                     <LinkStyled>Crie uma conta</LinkStyled>
                   </Link>
                 </Typography>
-              </Box>
+              </Box> */}
               {/* <Divider sx={{ my: 5 }}>ou</Divider>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Link href='/' passHref>

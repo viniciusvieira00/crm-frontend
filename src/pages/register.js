@@ -236,12 +236,21 @@ const RegisterPage = () => {
 
             </FormControl>
             {
-              values.password === values.confirmPassword ? (
+              values.password === values.confirmPassword ?  (
                 <Typography></Typography>
               ) : (
                 <Box mb={3}>
               <Typography color={'red'} fontSize={10}>As senhas não estão iguais</Typography>
             </Box>
+              )
+            }
+            {
+              values.password.length < 8 ? (
+                <Box mb={3}>
+              <Typography color={'red'} fontSize={10}>A senha deve ter no mínimo 8 caracteres</Typography>
+            </Box>
+              ) : (
+                <Typography></Typography>
               )
             }
 
@@ -282,7 +291,7 @@ const RegisterPage = () => {
             />
 
             {
-              values.password == values.confirmPassword ? (
+              values.password == values.confirmPassword && values.password.length>= 8 ? (
                 <Button onClick={handleRegister} fullWidth size='large' type='submit' variant='contained' sx={{ marginBottom: 7 }}>
               Registrar
             </Button>
