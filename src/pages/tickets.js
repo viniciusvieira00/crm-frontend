@@ -89,9 +89,11 @@ const handleDeleteTicket = (id) => {
 
   
 
-const handleGetTicket = (id) => {
+const handleGetTicket = () => {
+
+    const user = authService.getCurrentUser();
     
-    api.get(`api/tickets/${id}`, { headers: authHeader()})
+    api.get(`api/clients/getuserclient/${user.user}`, { headers: authHeader()})
     .then((data) => {
     setClient(data.data);
     console.log(clients)
@@ -176,19 +178,19 @@ const handleGetTicket = (id) => {
         </Grid>
 
         <Box
-                sx={{
-                  ml: '20px',
-                  gap: 5,
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  alignItems: 'center',
-                  justifyContent: 'space-evenly'
-                }}
-              >
+              sx={{
+                ml: '20px',
+                gap: 5,
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'space-evenly'
+              }}
+            >
                 <Box sx={{ display: 'flex', alignItems: 'center', mt: '30px'}}>
                 <Button onClick={handleOpen} color='primary' variant='contained'><Typography  color={'white'}>Adicionar Tickets</Typography></Button>
                 </Box>
-            </Box>
+        </Box>
       </Grid>
       <Modal
         open={open}

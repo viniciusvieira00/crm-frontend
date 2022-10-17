@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react'
 import { InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material'
 import api from 'src/utils/api'
 import authService from 'src/utils/auth/auth-service'
+import authHeader from 'src/utils/auth/auth-header'
 
 const ModalTicket = (props) => {
     const {setValues,values, handleChange, handleSubmit, client} = props;
@@ -32,9 +33,14 @@ const ModalTicket = (props) => {
 
 
   const user = authService.getCurrentUser();
-  api.get(`api/clients/user/${user.user}`).then((data) => {
-    setClientes(data.data)
-  })
+    
+  api.get(`api/clients/getuserclient/${user.user}`, { headers: authHeader()})
+  .then((data) => {
+  setClientes(data.data);
+  console.log(clientes)
+
+    
+})
 
 },[])
   return (
@@ -74,7 +80,7 @@ const ModalTicket = (props) => {
                           label="Clientes"
                           onChange={handleChange('client')}
                       >
-                      {clientes.map((item) => (<MenuItem value={item._id}>{item.name}</MenuItem>))}
+                      {clientes.map((item) => (<MenuItem value={item.id}>{item.name}</MenuItem>))}
                     
                     </Select>
                     </> 

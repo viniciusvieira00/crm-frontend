@@ -65,9 +65,6 @@ const Tabela = (props) => {
     captado: { color: 'success' }
   }
 
-  useEffect(() => {
-
-  })
   return (
     <Card>
       <TableContainer>
