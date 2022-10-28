@@ -22,7 +22,9 @@ import MuiCard from '@mui/material/Card'
 import InputAdornment from '@mui/material/InputAdornment'
 import MuiFormControlLabel from '@mui/material/FormControlLabel'
 import api from 'src/utils/api'
+
 // ** Icons Imports
+
 import Google from 'mdi-material-ui/Google'
 import Github from 'mdi-material-ui/Github'
 import Twitter from 'mdi-material-ui/Twitter'
@@ -70,6 +72,7 @@ const LoginPage = (props) => {
     showPassword: false
   })
   const {id, setId} = props
+ 
   // ** Hook
   const theme = useTheme()
   const router = useRouter()
@@ -115,6 +118,7 @@ const LoginPage = (props) => {
 
     }
   }
+  
   const handleResendOTP = async (e) => {
     e.preventDefault();
     try {
@@ -131,10 +135,12 @@ const LoginPage = (props) => {
 
     }
   }
+  
   const pagina = () => {
     
 
     return (
+      
       <>
       <Card sx={{ zIndex: 1 }}>
           <CardContent sx={{ padding: theme => `${theme.spacing(12, 9, 7)} !important` }}>
