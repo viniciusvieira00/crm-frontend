@@ -51,9 +51,13 @@ const UserSettings = () => {
   // ** State
 
   const router = useRouter()
+  
   const [value,setValue] = useState('account')
+
   const [user,setUser] = useState([])
+
   const [values, setValues] = useState({
+
     nome: '',
     cargo: '',
     email: '',
