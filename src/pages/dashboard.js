@@ -38,22 +38,8 @@ const Dashboard = () => {
   const [numero,setNumero] = useState('');
   const [tickets,setTickets] = useState([]);
   
-  const [currentUser, setCurrentUser] = useState([])
  
   const router = useRouter()
-  
-  const handleSubmit = () => {
-    api.post("api/bot/send-message", { numero: numero, message : message}).then((res) => {
-      console.log(res);
-    });
-  }
-
-
-  const handleDelete = () => setValue('')
-  
-  const handleMessage = (event) => setMessage(event.target.value)
-
-  const handleNumero = (event) => setNumero(event.target.value);
   
   useEffect( () => {
 
@@ -74,10 +60,7 @@ const Dashboard = () => {
     } else {
       alert('Você não está logado')
       router.push('/')
-      console.log('Nao existe ', currentUser)
     }
-
-    setCurrentUser(user)
 
 
     
@@ -90,10 +73,10 @@ const Dashboard = () => {
         {/* <Grid item xs={12} md={4}>
           <Trophy currentUser = {currentUser}/>
         </Grid> */}
-        
+{/* 
         <Grid item xs={12} md={8}>
           <StatisticsCard tickets ={tickets.length} />
-        </Grid>
+        </Grid> */}
 {/*         
         <Grid item xs={12} md={6} lg={4}>
           <WeeklyOverview />
