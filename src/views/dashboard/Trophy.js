@@ -4,7 +4,8 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import { styled, useTheme } from '@mui/material/styles'
-
+import authService from 'src/utils/auth/auth-service'
+import { useRouter } from 'next/router'
 // Styled component for the triangle shaped background image
 const TriangleImg = styled('img')({
   right: 0,
@@ -23,21 +24,23 @@ const TrophyImg = styled('img')({
 
 const Trophy = () => {
   // ** Hook
+  const router = useRouter()
+  const user = authService.getCurrentUser();
   const theme = useTheme()
   const imageSrc = theme.palette.mode === 'light' ? 'triangle-light.png' : 'triangle-dark.png'
 
   return (
     <Card sx={{ position: 'relative' }}>
       <CardContent>
-        <Typography variant='h6'>Parabéns Funcionário! 🥳</Typography>
+        <Typography variant='h6'>Parabéns {user.nome}</Typography>
         <Typography variant='body2' sx={{ letterSpacing: '0.25px' }}>
-          Melhor vendedor do mês
+          Este mês você completou
         </Typography>
-        <Typography variant='h5' sx={{ my: 4, color: 'primary.main' }}>
-          R$42.8k
+        <Typography variant='h6' sx={{ my: 4, color: 'primary.main' }}>
+          {user.clientes} oportunidades
         </Typography>
-        <Button size='small' variant='contained'>
-          Ver Ranking
+        <Button onClick={() => {router.push('/clientes')}} size='small' variant='contained'>
+          Ver todas
         </Button>
         <TriangleImg alt='triangle background' src={`/images/misc/${imageSrc}`} />
         <TrophyImg alt='trophy' src='/images/misc/trophy.png' />

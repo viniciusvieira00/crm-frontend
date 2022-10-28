@@ -80,7 +80,7 @@ const Clientes = () => {
 
 
   const handleRefreshUser = () => {
-
+    const user = authService.getCurrentUser();
     api.put(`api/clients/`+ values.id, {
         name: values.name,
         phone: values.phone,
@@ -88,15 +88,16 @@ const Clientes = () => {
         salary: values.salary,
         email: values.email,
         empresa: values.empresa,
-        status: values.status
-    }, {        headers: authHeader()})
+        status: values.status,
+
+    },  { params:{'cargo': user.cargo}, headers: authHeader()})
     window.location.reload()
 }
 
 const handleDeleteClient = (id) => {
   
   const user = authService.getCurrentUser();
-  api.delete(`api/clients/${id}/${user.user}`, {        headers: authHeader()})
+  api.delete(`api/clients/${id}/${user.user}`, {params:{'cargo': user.cargo},headers: authHeader()})
   window.location.reload()
 }
 
@@ -108,7 +109,7 @@ const handleDeleteClient = (id) => {
     if(user) {
       setCurrentUser(user)
       console.log(user)
-      api.get(`api/clients/user/${user.user}`, { headers: authHeader()})
+      api.get(`api/clients/user/${user.user}`, {params:{'cargo': user.cargo}, headers: authHeader()})
       .then((data) => {
       setClients(data.data);
       console.log(clients)
@@ -142,8 +143,8 @@ const handleDeleteClient = (id) => {
         status: values.status, 
         empresa: values.empresa, 
         phone: values.phone, 
-        produto: values.produto
-      }, {        headers: authHeader()})
+        produto: values.produto,
+      }, {params:{'cargo': user.cargo},headers: authHeader()})
 
       window.location.reload()
     } catch (error) {

@@ -11,7 +11,7 @@ import authService from 'src/utils/auth/auth-service';
 import { useRouter } from 'next/router'
 import { array } from 'prop-types';
 
-export default function Vendas() {
+export default function FilialTickets() {
 
   const [value, setValue] = useState('');
   const [open, setOpen] = useState(false);
@@ -149,11 +149,11 @@ const handleGetTicket = () => {
   return (
 
   <>
-  <Grid container spacing={6}>
-        <Grid item xs={12} md={4}>
+  <Grid  sx={{display: 'flex', alignItem: 'center', justifyContent: 'center'}} container spacing={6}>
+        <Grid item xs={6} md={4}>
           <Typography variant='h4'>Tickets</Typography>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={6} md={4}>
           <Input
             placeholder='Filtro'
             onFocus={handleOpenFilter}
@@ -190,11 +190,12 @@ const handleGetTicket = () => {
                 justifyContent: 'space-evenly'
               }}
             >
-                <Box sx={{ display: 'flex', alignItems: 'center', mt: '30px'}}>
-                <Button onClick={handleOpen} color='primary' variant='contained'><Typography  color={'white'}>Adicionar Tickets</Typography></Button>
-                </Box>
+
         </Box>
       </Grid>
+      <Box sx={{ display: 'flex', alignItems: 'left', mt: '30px'}}>
+                <Button onClick={handleOpen} color='primary' variant='contained'><Typography  color={'white'}>Adicionar Tickets</Typography></Button>
+                </Box>
       <Modal
         open={open}
         onClose={handleClose}

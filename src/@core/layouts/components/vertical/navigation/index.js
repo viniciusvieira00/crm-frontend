@@ -16,6 +16,8 @@ import VerticalNavHeader from './VerticalNavHeader'
 
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
+import authService from 'src/utils/auth/auth-service'
+import { Typography } from '@mui/material'
 
 const StyledBoxForShadow = styled(Box)({
   top: 50,
@@ -46,7 +48,6 @@ const Navigation = props => {
 
   // ** Ref
   const shadowRef = useRef(null)
-
   // ** Hooks
   const theme = useTheme()
 
@@ -118,7 +119,10 @@ const Navigation = props => {
                   setCurrentActiveGroup={setCurrentActiveGroup}
                   {...props}
                 />
+
               </List>
+
+
             )}
           </Box>
         </ScrollWrapper>

@@ -74,6 +74,7 @@ const RegisterPage = () => {
   const router = useRouter()
   
   const [values, setValues] = useState({
+    name: '',
     email : '',
     password: '',
     confirmPassword: '',
@@ -105,7 +106,7 @@ const RegisterPage = () => {
     try {
 
       
-      api.post('api/users', {email : values.email, password: values.password}).then((data) => {
+      api.post('api/users', {name: values.name,email : values.email, password: values.password}).then((data) => {
         console.log(data.data)
         if(data.data.message === 'Nao podemos criar outro usuário com o mesmo email') {
 
@@ -209,7 +210,7 @@ const RegisterPage = () => {
             <Typography variant='body2'>Faça o gerenciamento do seu negócio ser fácil</Typography>
           </Box>
           <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
-            {/* <TextField autoFocus fullWidth id='username' label='Usuário' sx={{ marginBottom: 4 }} /> */}
+            <TextField value={values.name} autoFocus fullWidth id='name' label='Nome' sx={{ marginBottom: 4 }} onChange={handleChange('name')} />
             <TextField onChange={handleChange('email')} autoFocus fullWidth value={values.email} id='email' label='Email' sx={{ marginBottom: 4 }} />
             <FormControl fullWidth>
               <InputLabel htmlFor='auth-register-password'>Senha</InputLabel>

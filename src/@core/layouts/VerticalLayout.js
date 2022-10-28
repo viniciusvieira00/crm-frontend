@@ -11,7 +11,6 @@ import ArrowUp from 'mdi-material-ui/ArrowUp'
 
 // ** Theme Config Import
 import themeConfig from 'src/configs/themeConfig'
-
 // ** Components
 import AppBar from './components/vertical/appBar'
 import Navigation from './components/vertical/navigation'
@@ -20,6 +19,8 @@ import ScrollToTop from 'src/@core/components/scroll-to-top'
 
 // ** Styled Component
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
+import authService from 'src/utils/auth/auth-service'
+import { Typography } from '@mui/material'
 
 const VerticalLayoutWrapper = styled('div')({
   height: '100%',
@@ -61,6 +62,7 @@ const VerticalLayout = props => {
 
   return (
     <>
+    
       <VerticalLayoutWrapper className='layout-wrapper'>
         <Navigation
           navWidth={navWidth}
@@ -69,6 +71,8 @@ const VerticalLayout = props => {
           toggleNavVisibility={toggleNavVisibility}
           {...props}
         />
+        
+        
         <MainContentWrapper className='layout-content-wrapper'>
           {/* <AppBar toggleNavVisibility={toggleNavVisibility} {...props} /> */}
 

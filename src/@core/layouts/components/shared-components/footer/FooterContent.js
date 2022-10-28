@@ -11,13 +11,11 @@ const FooterContent = () => {
   return (
     <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
       <Typography sx={{ mr: 2 }}>
-        {`© ${new Date().getFullYear()}, Feito com `}
-        <Box component='span' sx={{ color: 'error.main' }}>
-          ❤️
-        </Box>
+        {`© ${new Date().getFullYear()}, Feito `}
+
         {` por `}
-        <Link target='_blank' href='https://github.com/viniciusvieira00'>
-          viniciusvieira00
+        <Link target='_blank' href='https://d4business.co'>
+          D4B
         </Link>
       </Typography>
       {hidden ? null : (

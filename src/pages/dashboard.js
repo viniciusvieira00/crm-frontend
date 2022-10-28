@@ -27,6 +27,7 @@ import DepositWithdraw from 'src/views/dashboard/DepositWithdraw'
 import SalesByCountries from 'src/views/dashboard/SalesByCountries'
 import QRCode from 'react-qr-code';
 import { useRouter } from 'next/router'
+import authHeader from 'src/utils/auth/auth-header'
 
 const Dashboard = () => {
 
@@ -35,8 +36,9 @@ const Dashboard = () => {
   const [message, setMessage] = useState('');
 
   const [numero,setNumero] = useState('');
+  const [tickets,setTickets] = useState([]);
   
-  const [currentUser, setCurrentUser] = useState(undefined)
+  const [currentUser, setCurrentUser] = useState([])
  
   const router = useRouter()
   
@@ -52,19 +54,27 @@ const Dashboard = () => {
   const handleMessage = (event) => setMessage(event.target.value)
 
   const handleNumero = (event) => setNumero(event.target.value);
-
   useEffect( () => {
+
     const user = authService.getCurrentUser();
 
     if(user) {
-      setCurrentUser(user)
       console.log(user)
+      api.get(`api/tickets/getall/${user.user}`, {params:{'cargo': user.cargo}, headers: authHeader()})
+      .then((data) => {
+
+      setTickets(data.data);
+
+        
+    })
+
+
+    
     } else {
       alert('Você não está logado')
       router.push('/')
       console.log('Nao existe ', currentUser)
     }
-
 
 
     
@@ -78,9 +88,9 @@ const Dashboard = () => {
           <Trophy/>
         </Grid>
         <Grid item xs={12} md={8}>
-          <StatisticsCard />
+          <StatisticsCard tickets ={tickets.length} />
         </Grid>
-        
+{/*         
         <Grid item xs={12} md={6} lg={4}>
           <WeeklyOverview />
         </Grid>
@@ -141,7 +151,7 @@ const Dashboard = () => {
         </Grid>
         <Grid item xs={12}>
           
-        </Grid>
+        </Grid> */}
       </Grid>
     </ApexChartWrapper>
   )

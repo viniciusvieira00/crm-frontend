@@ -25,7 +25,7 @@ const navigation = () => {
     {
       title: 'Conta',
       icon: AccountCogOutline,
-      path: `/account-settings/`
+      path: `/account-settings/:id`
     },
     {
       sectionTitle: 'Utilidades'

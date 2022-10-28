@@ -17,12 +17,14 @@ import InformationOutline from 'mdi-material-ui/InformationOutline'
 
 // ** Demo Tabs Imports
 import TabInfo from 'src/views/account-settings/TabInfo'
-import TabAccount from 'src/views/account-settings/TabAccount'
-import TabSecurity from 'src/views/account-settings/TabSecurity'
+import TabAccount from 'src/views/account-settings/Geral'
+import TabSecurity from 'src/views/account-settings/Security'
 
 // ** Third Party Styles Imports
 import 'react-datepicker/dist/react-datepicker.css'
+import api from 'src/utils/api'
 import authService from 'src/utils/auth/auth-service'
+import authHeader from 'src/utils/auth/auth-header'
 import { useRouter } from 'next/router'
 
 const Tab = styled(MuiTab)(({ theme }) => ({
@@ -43,24 +45,70 @@ const TabName = styled('span')(({ theme }) => ({
   }
 }))
 
-const AccountSettings = () => {
-  const router = useRouter()
+const UserSettings = () => {
   // ** State
-  const [value, setValue] = useState('account')
+
+  const router = useRouter()
+  const [value,setValue] = useState('account')
+  const [user,setUser] = useState([])
+  const [values, setValues] = useState({
+    nome: '',
+    cargo: '',
+    email: '',
+    senha: '',
+    novaSenha: '',
+    confirmarNovaSenha: '',
+    user: '',
+    showConfirmNewPassword: false,
+    showCurrentPassword: false,
+    showNewPassword: false
+  })
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
 
+  const handleRefreshUser = () => {
+    const { id } = router.query
+    api.put(`api/users/`+ id, {
+        name: values.nome,
+        email: values.email
+
+    },  { params:{'cargo': user.cargo}, headers: authHeader()})
+    window.location.reload()
+}
+
+
+
+
+
   useEffect(() => {
+
     const user= authService.getCurrentUser()
 
     if(user){
-      router.push(`/account-settings/${user.user}`)
+        api.get(`api/users/${user.user}`, {params:{'cargo': user.cargo}, headers: authHeader()})
+        .then((data) => {
+        setUser(data.data);
+        console.log(data.data)
+        setValues({
+          nome: data.data.name,
+          cargo: data.data.cargo,
+          email: data.data.email,
+        })
+    
+          
+      })
     } else {
       router.push('/')
     }
-  })
+
+
+
+
+  },[])
+
+
   return (
     <Card>
       <TabContext value={value}>
@@ -78,7 +126,7 @@ const AccountSettings = () => {
               </Box>
             }
           />
-          {/* <Tab
+          <Tab
             value='security'
             label={
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -86,7 +134,7 @@ const AccountSettings = () => {
                 <TabName>Segurança</TabName>
               </Box>
             }
-          /> */}
+          />
           {/* <Tab
             value='info'
             label={
@@ -99,10 +147,10 @@ const AccountSettings = () => {
         </TabList>
 
         <TabPanel sx={{ p: 0 }} value='account'>
-          <TabAccount />
+          <TabAccount setValues= {setValues} values = {values} user = {user} handleRefreshUser={handleRefreshUser}/>
         </TabPanel>
         <TabPanel sx={{ p: 0 }} value='security'>
-          <TabSecurity />
+          <TabSecurity setValues= {setValues} values = {values} user = {user} />
         </TabPanel>
         <TabPanel sx={{ p: 0 }} value='info'>
           <TabInfo />
@@ -112,4 +160,4 @@ const AccountSettings = () => {
   )
 }
 
-export default AccountSettings
+export default UserSettings

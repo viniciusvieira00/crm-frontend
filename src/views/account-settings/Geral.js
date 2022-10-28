@@ -20,6 +20,10 @@ import Button from '@mui/material/Button'
 
 // ** Icons Imports
 import Close from 'mdi-material-ui/Close'
+import { FormLabel } from '@mui/material'
+import { useEffect } from 'react'
+import authHeader from 'src/utils/auth/auth-header'
+import api from 'src/utils/api'
 
 const ImgStyled = styled('img')(({ theme }) => ({
   width: 120,
@@ -46,19 +50,16 @@ const ResetButtonStyled = styled(Button)(({ theme }) => ({
 }))
 
 const TabAccount = (props) => {
-
+  const {values, user, setValues, handleRefreshUser} = props
   // ** State
+  const [usuario,setUser] = useState([])
   const [openAlert, setOpenAlert] = useState(true)
   const [imgSrc, setImgSrc] = useState('/images/avatars/1.png')
 
-  const onChange = file => {
-    const reader = new FileReader()
-    const { files } = file.target
-    if (files && files.length !== 0) {
-      reader.onload = () => setImgSrc(reader.result)
-      reader.readAsDataURL(files[0])
-    }
+  const handleChange = prop => event => {
+    setValues({ ...values, [prop]: event.target.value })
   }
+
 
   return (
     <CardContent>
@@ -90,15 +91,23 @@ const TabAccount = (props) => {
           </Grid>
 
           <Grid item xs={12} sm={6}>
-            <TextField fullWidth label='Nome' defaultValue='Nome' />
+            <TextField
+             fullWidth
+              onChange={handleChange('nome')}
+              value= {values.nome}
+              label='Nome'
+
+
+             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              fullWidth
-              type='email'
+             fullWidth
+              onChange={handleChange('email')}
+              value= {values.email}
               label='Email'
-              placeholder='example@gmail.com'
-              defaultValue='example@gmail.com'
+
+
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -107,13 +116,13 @@ const TabAccount = (props) => {
               fullWidth
               type='text'
               label='Cargo'
+
               placeholder='Cargo'
+              value={values.cargo}
             />
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField fullWidth label='Senha' placeholder='*******' defaultValue='*****' />
-          </Grid>
+
 
           {/* {openAlert ? (
             <Grid item xs={12} sx={{ mb: 3 }}>
@@ -135,12 +144,10 @@ const TabAccount = (props) => {
           ) : null} */}
 
           <Grid item xs={12}>
-            <Button variant='contained' sx={{ marginRight: 3.5 }}>
+            <Button onClick={handleRefreshUser} variant='contained' sx={{ marginRight: 3.5 }}>
               Salvar informações
             </Button>
-            <Button type='reset' variant='outlined' color='secondary'>
-              Resetar
-            </Button>
+
           </Grid>
         </Grid>
       </form>

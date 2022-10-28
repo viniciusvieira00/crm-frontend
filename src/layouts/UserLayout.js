@@ -8,6 +8,7 @@ import VerticalLayout from 'src/@core/layouts/VerticalLayout'
 
 // ** Navigation Imports
 import VerticalNavItems from 'src/navigation/vertical'
+import VerticalNavItemsAdmin from 'src/navigation/vertical/admin'
 
 // ** Component Import
 import UpgradeToProButton from './components/UpgradeToProButton'
@@ -15,10 +16,15 @@ import VerticalAppBarContent from './components/vertical/AppBarContent'
 
 // ** Hook Import
 import { useSettings } from 'src/@core/hooks/useSettings'
+import authService from 'src/utils/auth/auth-service'
 
 const UserLayout = ({ children }) => {
+
   // ** Hooks
+
   const { settings, saveSettings } = useSettings()
+
+
 
   /**
    *  The below variable will hide the current layout menu at given screen size.

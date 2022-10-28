@@ -94,19 +94,29 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       await authService.login(values.email,values.password).then((res) => {
-        if(res){
 
+        const user = authService.getCurrentUser();
+
+        if(res.status == "failed"){
+          alert(res.message)
+
+          router.push(`/otp/${user.user}`)
+        } else {
           router.push('/clientes')
-        } 
+        }
           
     
       })
 
     } catch (error) {
+      alert(error.message)
       console.log(error)
-      alert('Usuário e senha não encontrado. Verifique se digitou corretamente!')
+
+
     }
   }
+
+
   
   const pagina = () => {
   

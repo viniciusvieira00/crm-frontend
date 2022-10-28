@@ -16,7 +16,7 @@ import authService from 'src/utils/auth/auth-service'
 // ** Styled Component Import
 import ApexChartWrapper from 'src/@core/styles/libs/react-apexcharts'
 import { Button, Typography } from '@mui/material'
-import api from '../utils/api'
+import apiBot from 'src/utils/apiBot'
 import BotInit from 'src/views/bot/BotInit'
 
 // ** Demo Components Imports
@@ -47,30 +47,35 @@ const Bot = () => {
   const router = useRouter()
 
   const handleInit = () => {
-    api.get('api/bot', { headers: authHeader()}).then((res) => {
+    // , { headers: authHeader()}
+    const user = authService.getCurrentUser();
+    apiBot.get(`api/bot/${user.user}`).then((res) => {
       setValue(res.data.qr)
     })}
   
   
   const handleSubmit = () => {
-    api.post("api/bot/send-message", { numero: numero, message : message}, { headers: authHeader()}).then((res) => {
+    const user = authService.getCurrentUser();
+    apiBot.post(`api/bot/send-message/${user.user}`, { numero: numero, message : message}).then((res) => {
       console.log(res);
     });
   }
 
   const handleMessages = () => {
+    const user = authService.getCurrentUser();
     const arrayNumeros = [];
     files?.map((d) => {
       arrayNumeros.push(d.numero)
    })
-    api.post("api/bot/send-multiple-message", { numeros: arrayNumeros, message : message}, { headers: authHeader()}).then((res) => {
+    apiBot.post(`api/bot/send-multiple-message/${user.user}`, { numeros: arrayNumeros, message : message}).then((res) => {
       console.log(res);
     });
   }
 
 
   const handleDisconnect = () => {
-    api.post("api/bot/disconnect",{ headers: authHeader()} ).then((res) => {console.log(res)})
+    const user = authService.getCurrentUser();
+    apiBot.post(`api/bot/disconnect/${user.user}`,{ headers: authHeader()} ).then((res) => {console.log(res)})
   }
 
   const handleDelete = () => setValue(null)
