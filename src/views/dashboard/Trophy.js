@@ -35,12 +35,12 @@ const Trophy = (props) => {
   return (
     <Card sx={{ position: 'relative' }}>
       <CardContent>
-        <Typography variant='h6'>Parabéns {user.nome}</Typography>
+        <Typography variant='h6'>Parabéns {currentUser.nome}</Typography>
         <Typography variant='body2' sx={{ letterSpacing: '0.25px' }}>
           Este mês você completou
         </Typography>
         <Typography variant='h6' sx={{ my: 4, color: 'primary.main' }}>
-          {user.clientes} oportunidades
+          {currentUser.clientes} oportunidades
         </Typography>
         <Button onClick={() => {router.push('/clientes')}} size='small' variant='contained'>
           Ver todas
