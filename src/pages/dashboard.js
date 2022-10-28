@@ -90,6 +90,7 @@ const Dashboard = () => {
         {/* <Grid item xs={12} md={4}>
           <Trophy currentUser = {currentUser}/>
         </Grid> */}
+        
         <Grid item xs={12} md={8}>
           <StatisticsCard tickets ={tickets.length} />
         </Grid>
