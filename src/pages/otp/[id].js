@@ -51,11 +51,15 @@ const Card = styled(MuiCard)(({ theme }) => ({
 const LoginPage = (props) => {
   
   // ** State
+
   const [values, setValues] = useState({
+    
     token: '',
     email: '',
     showPassword: false
+
   })
+  
   const {id, setId} = props
  
   // ** Hook
