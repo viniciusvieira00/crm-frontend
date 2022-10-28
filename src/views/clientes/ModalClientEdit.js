@@ -13,10 +13,14 @@ import EmailOutline from 'mdi-material-ui/EmailOutline'
 import AccountOutline from 'mdi-material-ui/AccountOutline'
 import MessageOutline from 'mdi-material-ui/MessageOutline'
 import api from 'src/utils/api'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { MenuItem, Select } from '@mui/material'
 
 const ModalClientEdit = (props) => {
     const {rows, row,values,handleChange, setValues, handleRefreshUser, rowId} = props;
+    const [age,setAge]= useState()
+
+    const status = [,{name: 'Sem contato'},{name: 'Contato feito'},{name:'Qualificação'},{name: 'APP/Proposta enviada'},{name: 'Reunião agendada'},{name:'Negociação/Conclusão'},{name: 'Fechado'},{name:'Não fechado'}]
 
 
 
@@ -154,21 +158,19 @@ const ModalClientEdit = (props) => {
               />
             </Grid>
             <Grid item xs={6}>
-              <TextField
-                fullWidth
-                value= {values.status}
-                label='Status Atual'
+            <>
+            <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={values.status}
+                label="Clientes"
                 onChange={handleChange('status')}
-                placeholder={values.status}
-                sx={{ '& .MuiOutlinedInput-root': { alignItems: 'baseline' } }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <AccountOutline />
-                    </InputAdornment>
-                  )
-                }}
-              />
+            >
+                      {status.map((item) => (<MenuItem value={item.name}>{item.name}</MenuItem>))}
+                    
+
+              </Select>
+              </> 
             </Grid>
             
             <Grid item xs={6}>

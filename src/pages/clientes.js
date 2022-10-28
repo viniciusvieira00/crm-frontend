@@ -74,6 +74,7 @@ const Clientes = () => {
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
+    console.log(values)
   }
   
   const router = useRouter()
@@ -85,7 +86,6 @@ const Clientes = () => {
         name: values.name,
         phone: values.phone,
         produto: values.produto,
-        salary: values.salary,
         email: values.email,
         empresa: values.empresa,
         status: values.status,

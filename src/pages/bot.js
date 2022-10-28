@@ -47,8 +47,11 @@ const Bot = () => {
   const router = useRouter()
 
   const handleInit = () => {
+
     // , { headers: authHeader()}
+
     const user = authService.getCurrentUser();
+    
     apiBot.get(`api/bot/${user.user}`).then((res) => {
       setValue(res.data.qr)
     })}
