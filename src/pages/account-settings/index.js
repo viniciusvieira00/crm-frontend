@@ -44,8 +44,11 @@ const TabName = styled('span')(({ theme }) => ({
 }))
 
 const AccountSettings = () => {
+
   const router = useRouter()
+
   // ** State
+
   const [value, setValue] = useState('account')
 
   const handleChange = (event, newValue) => {
@@ -61,7 +64,9 @@ const AccountSettings = () => {
       router.push('/')
     }
   })
+
   return (
+
     <Card>
       <TabContext value={value}>
         <TabList
@@ -78,24 +83,7 @@ const AccountSettings = () => {
               </Box>
             }
           />
-          {/* <Tab
-            value='security'
-            label={
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <LockOpenOutline />
-                <TabName>Segurança</TabName>
-              </Box>
-            }
-          /> */}
-          {/* <Tab
-            value='info'
-            label={
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <InformationOutline />
-                <TabName>Informações</TabName>
-              </Box>
-            }
-          /> */}
+
         </TabList>
 
         <TabPanel sx={{ p: 0 }} value='account'>

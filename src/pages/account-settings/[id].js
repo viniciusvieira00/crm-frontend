@@ -1,3 +1,4 @@
+
 // ** React Imports
 import { useEffect, useState } from 'react'
 
@@ -46,6 +47,7 @@ const TabName = styled('span')(({ theme }) => ({
 }))
 
 const UserSettings = () => {
+
   // ** State
 
   const router = useRouter()
@@ -110,6 +112,7 @@ const UserSettings = () => {
 
 
   return (
+
     <Card>
       <TabContext value={value}>
         <TabList
@@ -135,15 +138,7 @@ const UserSettings = () => {
               </Box>
             }
           />
-          {/* <Tab
-            value='info'
-            label={
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <InformationOutline />
-                <TabName>Informações</TabName>
-              </Box>
-            }
-          /> */}
+
         </TabList>
 
         <TabPanel sx={{ p: 0 }} value='account'>
