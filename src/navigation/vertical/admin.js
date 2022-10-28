@@ -54,15 +54,7 @@ const navigation = () => {
       path: '/filial',
       openInNewTab: false
     },
-    {
-      sectionTitle: 'Whatsapp'
-    },
-    {
-      title: 'BOT',
-      icon: AlertCircleOutline,
-      path: '/bot',
-      openInNewTab: false
-    },
+
     
     // {
     //   sectionTitle: 'Utilidades'
