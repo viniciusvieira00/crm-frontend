@@ -54,6 +54,7 @@ const Dashboard = () => {
   const handleMessage = (event) => setMessage(event.target.value)
 
   const handleNumero = (event) => setNumero(event.target.value);
+  
   useEffect( () => {
 
     const user = authService.getCurrentUser();
@@ -76,6 +77,8 @@ const Dashboard = () => {
       console.log('Nao existe ', currentUser)
     }
 
+    setCurrentUser(user)
+
 
     
   },[])
@@ -85,7 +88,7 @@ const Dashboard = () => {
     <ApexChartWrapper>
       <Grid container spacing={6}>
         <Grid item xs={12} md={4}>
-          <Trophy/>
+          <Trophy currentUser = {currentUser}/>
         </Grid>
         <Grid item xs={12} md={8}>
           <StatisticsCard tickets ={tickets.length} />

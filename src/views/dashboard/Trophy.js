@@ -6,7 +6,6 @@ import CardContent from '@mui/material/CardContent'
 import { styled, useTheme } from '@mui/material/styles'
 import authService from 'src/utils/auth/auth-service'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
 // Styled component for the triangle shaped background image
 const TriangleImg = styled('img')({
   right: 0,
@@ -23,21 +22,15 @@ const TrophyImg = styled('img')({
   position: 'absolute'
 })
 
-const Trophy = () => {
-
+const Trophy = (props) => {
+  
   // ** Hook
   const router = useRouter()
-  const [user,setUser] = useState([])
+
+  const {currentUser} = props
+  
   const theme = useTheme()
   const imageSrc = theme.palette.mode === 'light' ? 'triangle-light.png' : 'triangle-dark.png'
-
-  useEffect(() => {
-
-    const user = authService.getCurrentUser();
-
-    setUser(user)
-
-  },[])
 
   return (
     <Card sx={{ position: 'relative' }}>
