@@ -109,8 +109,10 @@ const Clientes = () => {
         empresa: values.empresa,
         status: values.status,
 
-    },  { params:{'cargo': user.cargo}, headers: authHeader()})
+    },  { params:{'cargo': user.cargo}, headers: authHeader()}).then((data) => {
+
     window.location.reload()
+    })
 }
 
 const handleDeleteClient = (id) => {
