@@ -116,8 +116,10 @@ const Clientes = () => {
 const handleDeleteClient = (id) => {
   
   const user = authService.getCurrentUser();
-  api.delete(`api/clients/${id}/${user.user}`, {params:{'cargo': user.cargo},headers: authHeader()})
+  api.delete(`api/clients/${id}/${user.user}`, {params:{'cargo': user.cargo},headers: authHeader()}).then((data)=> {
+
   window.location.reload()
+  })
 }
 
   
@@ -180,9 +182,11 @@ const handleDeleteClient = (id) => {
       api.post(`api/clients/user/manyclients/${user.user}`,
         {
           data: data
-        }, {params:{'cargo': user.cargo},headers: authHeader()}).then(data => console.log(data))
+        }, {params:{'cargo': user.cargo},headers: authHeader()}).then(data => {
+          window.location.reload()
+        })
       
-      window.location.reload()
+
     } catch (error) {
       console.log(error)
       
