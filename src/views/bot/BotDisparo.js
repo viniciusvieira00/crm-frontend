@@ -20,20 +20,7 @@ import ReactApexcharts from 'src/@core/components/react-apexcharts'
 import { useState } from 'react'
 import { WebBox } from 'mdi-material-ui'
 var array = []
-function catador (file) {
-    xlsxFile(file).then((rows) => { 
-        for (i in rows){ 
-            for (j in rows[i]){
-                if(rows[i][j] != null){
-                    array.push(rows[i][j]); 
-                } 
-    
-                } 
-            } 
-        console.log(array)
-        return array
-        })
-}
+
 const BotDisparo = (props) => {
 
   const {files, setFile,handleNumero,handleMessages,handleSubmit,handleMessage,numero,message} = props;

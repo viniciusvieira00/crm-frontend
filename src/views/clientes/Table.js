@@ -10,7 +10,8 @@ import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import Typography from '@mui/material/Typography'
 import TableContainer from '@mui/material/TableContainer'
-import { DotsVertical } from 'mdi-material-ui'
+import { DotsVertical,TrashCan } from 'mdi-material-ui'
+import {PencilBoxOutline} from 'mdi-material-ui'
 import { Button, IconButton, ListItem, Menu, MenuItem, Modal } from '@mui/material'
 
 import { useState } from 'react'
@@ -18,7 +19,7 @@ import ModalClient from './ModalClient'
 import ModalClientEdit from './ModalClientEdit'
 
 const DashboardTable = (props) => {
-  const {clientsFiltered,setClientsFiltered,handleRefreshUser, values,handleChange,rows, setValues, clients, filter, openFilter, filtro, handleDeleteClient} = props
+  const {clientsFiltered,setClientsFiltered,handleRefreshUser, values,handleChange,rows, setValues, clients, filter, openFilter, filtro, handleDeleteClient,setClients} = props
   const [rowId,setRowId] = useState('')
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -32,7 +33,7 @@ const DashboardTable = (props) => {
   
   const [open, setOpen] = useState(false);
   const handleRowId = (id) => setRowId(id);
-  const handleOpenModal = (id) => {
+  const handleOpenModal = (id,name) => {
     setOpen(true)
     handleRowId(id)
     console.log(filter)
@@ -42,7 +43,9 @@ const DashboardTable = (props) => {
 
 
 
-  const handleCloseModal = () => setOpen(false);
+  const handleCloseModal = () => {
+    setOpen(false)
+  };
 
   const statusObj = {
     aplicado: { color: 'info' },
@@ -58,6 +61,7 @@ const DashboardTable = (props) => {
         <Table sx={{ minWidth: 800 }} aria-label='table in dashboard'>
           <TableHead>
             <TableRow>
+              <TableCell>ID</TableCell>
               <TableCell>Nome</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Telefone</TableCell>
@@ -109,7 +113,7 @@ const DashboardTable = (props) => {
               openFilter ? (
                 filtro.map(row => (
               <TableRow hover key={row.id} sx={{ '&:last-of-type td, &:last-of-type th': { border: 0 } }} >
-              
+                <TableCell>{row.id}</TableCell>
                 <TableCell sx={{ py: theme => `${theme.spacing(0.5)} !important` }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <Typography sx={{ fontWeight: 500, fontSize: '0.875rem !important' }}>{row.name}</Typography>
@@ -122,13 +126,13 @@ const DashboardTable = (props) => {
                   {row.status}
                 </TableCell>
                 <TableCell>
-                <IconButton value = {openAction} onClick={handleClickAction} size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
-                <DotsVertical />
-
-
-
-              </IconButton>
-              <Menu
+                <IconButton value = {row.id} onClick={() => {handleOpenModal(row._id,row.name)}} size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
+                    <PencilBoxOutline />
+                </IconButton>
+                <IconButton value = {row.id} onClick={() => {handleDeleteClient(row._id)}} size='small' aria-label='settings' className='card-more-options' sx={{ color: 'red' }}>
+                    <TrashCan />
+                </IconButton>
+              {/* <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"
         anchorEl={anchorEl}
@@ -145,7 +149,7 @@ const DashboardTable = (props) => {
       >
         <MenuItem onClick={() => {handleOpenModal(row._id)}}>Editar</MenuItem>
         <MenuItem onClick={() => {handleDeleteClient(row._id)}}>Deletar</MenuItem>
-      </Menu>
+      </Menu> */}
 
                 </TableCell>
                 <Modal
@@ -166,6 +170,7 @@ const DashboardTable = (props) => {
                ) : (
                 rows.map(row => (
               <TableRow hover key={row.id} sx={{ '&:last-of-type td, &:last-of-type th': { border: 0 } }} >
+              <TableCell>{row.id}</TableCell>
               
                 <TableCell sx={{ py: theme => `${theme.spacing(0.5)} !important` }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -181,13 +186,13 @@ const DashboardTable = (props) => {
                   }
                 </TableCell>
                 <TableCell>
-                <IconButton value = {openAction} onClick={handleClickAction} size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
-                <DotsVertical />
-
-
-
-              </IconButton>
-              <Menu
+                <IconButton value = {row.id} onClick={() => {handleOpenModal(row._id,row.name)}} size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
+                    <PencilBoxOutline />
+                </IconButton>
+                <IconButton value = {row.id} onClick={() => {handleDeleteClient(row._id)}} size='small' aria-label='settings' className='card-more-options' sx={{ color: 'red' }}>
+                    <TrashCan />
+                </IconButton>
+              {/* <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"
         anchorEl={anchorEl}
@@ -202,20 +207,12 @@ const DashboardTable = (props) => {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={() => {handleOpenModal(row._id)}}>Editar</MenuItem>
+        <MenuItem onClick={() => {handleOpenModal(row._id,row.name)}}>Editar</MenuItem>
         <MenuItem onClick={() => {handleDeleteClient(row._id)}}>Deletar</MenuItem>
-      </Menu>
+      </Menu> */}
 
                 </TableCell>
-                <Modal
-                  open={open}
-                  onClose={handleCloseModal}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                  sx={{justifyContent: 'center', display: 'flex'}}
-                >
-                  <ModalClientEdit handleRefreshUser = {handleRefreshUser} setValues = {setValues} values= {values} handleChange = {handleChange} rowId = {rowId} rows = {row} row = {rows}/>
-                </Modal>
+
                 
 
               </TableRow>
@@ -228,6 +225,15 @@ const DashboardTable = (props) => {
               }
 
           </TableBody>
+          <Modal
+                  open={open}
+                  onClose={handleCloseModal}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                  sx={{justifyContent: 'center', display: 'flex'}}
+                >
+                  <ModalClientEdit handleRefreshUser = {handleRefreshUser} setValues = {setValues} values= {values} handleChange = {handleChange} rowId = {rowId}  row = {rows}/>
+                </Modal>
         </Table>
       </TableContainer>
 

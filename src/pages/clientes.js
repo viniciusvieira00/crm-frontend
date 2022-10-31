@@ -8,13 +8,14 @@ import CurrencyUsd from 'mdi-material-ui/CurrencyUsd'
 import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
 import BriefcaseVariantOutline from 'mdi-material-ui/BriefcaseVariantOutline'
 import { useState } from 'react'
+import { read, utils, writeFile } from 'xlsx';
 
 // ** Custom Components Imports
 import CardStatisticsVerticalComponent from 'src/@core/components/card-statistics/card-stats-vertical'
 
 // ** Styled Component Import
 import ApexChartWrapper from 'src/@core/styles/libs/react-apexcharts'
-import { Box, Button, Input, Modal, Typography } from '@mui/material'
+import { Box, Button, Input, Modal, TextField, Typography } from '@mui/material'
 import api from '../utils/api'
 import authService from 'src/utils/auth/auth-service'
 
@@ -26,8 +27,26 @@ import { useEffect } from 'react'
 import authHeader from 'src/utils/auth/auth-header'
 import { useRouter } from 'next/router'
 import ModalClient from 'src/views/clientes/ModalClient'
+import { CodeNotEqual } from 'mdi-material-ui'
 
 const Clientes = () => {
+
+  const [data, setdata] = useState([])
+  
+  const readfile = ($event) => {
+      const files = $event.target.files;
+      const file = files[0];
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onload = (event) => {
+          const wb = read(event.target.result);
+          const sheets = wb.SheetNames;
+          const rows = utils.sheet_to_json(wb.Sheets[sheets[0]]);
+          setdata(rows)
+          console.log(data)
+      }
+
+  }
 
   const [value, setValue] = useState('');
 
@@ -152,6 +171,24 @@ const handleDeleteClient = (id) => {
     }
 
   }
+
+  const handleSubmitSheet = (data) => {
+
+    try {
+      const user = authService.getCurrentUser();
+     
+      api.post(`api/clients/user/manyclients/${user.user}`,
+        {
+          data: data
+        }, {params:{'cargo': user.cargo},headers: authHeader()}).then(data => console.log(data))
+      
+      window.location.reload()
+    } catch (error) {
+      console.log(error)
+      
+    }
+    
+  }
   
   const handleFilterClients = () => {
     let arr = []
@@ -166,8 +203,6 @@ const handleDeleteClient = (id) => {
   }
   
   const filtro = clients.filter((item) => item.name.includes(filter))
-
-  
 
   return (
   
@@ -187,7 +222,9 @@ const handleDeleteClient = (id) => {
           </Input>
         </Grid>
         <Grid item xs={12}>
-          <Table 
+          <Table
+            readfile = {readfile} 
+            setClients = {setClients}
             handleDeleteClient = {handleDeleteClient}
             openFilter = {openFilter} 
             clients = {clients} 
@@ -203,20 +240,42 @@ const handleDeleteClient = (id) => {
 
           />
         </Grid>
+        <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
         <Box
-                sx={{
-                  ml: '20px',
-                  gap: 5,
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  alignItems: 'center',
-                  justifyContent: 'space-evenly'
-                }}
-              >
-                <Box sx={{ display: 'flex', alignItems: 'center', mt: '30px'}}>
-                <Button onClick={handleOpen} color='primary' variant='contained'><Typography  color={'white'}>Adicionar Cliente</Typography></Button>
+              sx={{
+                ml: '20px',
+                gap: 5,
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }}
+            >
+                <Box sx={{ display: 'flex', alignItems: 'left', mt: '30px'}}>
+                <Button onClick={handleOpen} color='primary' variant='contained'><Typography  color={'white'}>Adicionar Clientes</Typography></Button>
                 </Box>
-            </Box>
+        </Box>
+
+        <Box
+              sx={{
+                ml: '50px',
+                gap: 10,
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }}
+            >
+                <Input
+                  type='file'
+                  onChange={readfile}
+                  accept= '.xlsx'
+                />
+                <Box sx={{ display: 'flex', alignItems: 'right', mt: '30px'}}>
+                <Button onClick={() => {handleSubmitSheet(data)}} color='primary' variant='contained'><Typography  color={'white'}>Adicionar Planilha</Typography></Button>
+                </Box>
+        </Box>
+      </Box>
       </Grid>
       <Modal
         open={open}
@@ -227,6 +286,7 @@ const handleDeleteClient = (id) => {
       >
         <ModalClient setValues = {setValues} handleSubmit ={handleSubmit} handleChange = {handleChange} values = {values}/>
       </Modal>
+
     </ApexChartWrapper>
 
     

@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
-import { DotsVertical } from 'mdi-material-ui'
+import { DotsVertical, PencilBoxOutline, TrashCan } from 'mdi-material-ui'
 import { Button, IconButton, ListItem, MenuItem, Menu } from '@mui/material'
 import {Input, Modal, Typography, Grid } from '@mui/material'
 
@@ -92,13 +92,13 @@ const Tabela = (props) => {
               <TableCell>{row.titulo}</TableCell>
               <TableCell>{row.client}</TableCell>
               <TableCell>
-              <IconButton value = {openAction} onClick={handleClickAction} size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
-                <DotsVertical />
-
-
-
+              <IconButton value = {row.id} onClick={() => {handleOpenModal(row._id,row.name)}} size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
+                    <PencilBoxOutline />
+                </IconButton>
+              <IconButton value = {row.id} onClick={() => {handleDeleteTicket(row._id)}} size='small' aria-label='settings' className='card-more-options' sx={{ color: 'red' }}>
+                  <TrashCan />
               </IconButton>
-              <Menu
+              {/* <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"
         anchorEl={anchorEl}
@@ -115,7 +115,7 @@ const Tabela = (props) => {
       >
         <MenuItem onClick={handleCloseAction}>Editar</MenuItem>
         <MenuItem onClick={() => {handleDeleteTicket(row.id)}}>Deletar</MenuItem>
-      </Menu>
+      </Menu> */}
 
               </TableCell>
               <Modal
@@ -145,13 +145,13 @@ const Tabela = (props) => {
               <TableCell>{row.titulo}</TableCell>
               <TableCell>{row.client}</TableCell>
               <TableCell>
-              <IconButton value = {openAction} onClick={handleClickAction} size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
-                <DotsVertical />
-
-
-
+              <IconButton value = {row.id} onClick={() => {handleOpenModal(row._id,row.name)}} size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
+                    <PencilBoxOutline />
+                </IconButton>
+              <IconButton value = {row.id} onClick={() => {handleDeleteTicket(row._id)}} size='small' aria-label='settings' className='card-more-options' sx={{ color: 'red' }}>
+                  <TrashCan />
               </IconButton>
-              <Menu
+              {/* <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"
         anchorEl={anchorEl}
@@ -168,7 +168,7 @@ const Tabela = (props) => {
       >
         <MenuItem onClick={handleCloseAction}>Editar</MenuItem>
         <MenuItem onClick={() => {handleDeleteTicket(row.id)}}>Deletar</MenuItem>
-      </Menu>
+      </Menu> */}
               </TableCell>
               <Modal
                 open={open}
